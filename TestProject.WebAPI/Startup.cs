@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,14 @@ namespace TestProject.WebAPI
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ILogger, Logger>();
+            services.AddAutoMapper(typeof(Startup));
+
+            //Automapper
+            var mapperConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddCorsPolicy();
             services.AddControllers();

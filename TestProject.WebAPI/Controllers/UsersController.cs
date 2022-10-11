@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using TestProject.WebAPI.Interfaces;
 using System.Linq;
-using TestProject.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using TestProject.WebAPI.DTO;
 
 namespace TestProject.WebAPI.Controllers
 {
@@ -49,13 +49,13 @@ namespace TestProject.WebAPI.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<ActionResult> Post(User user)
+        public async Task<ActionResult> Post(UserDTO userDTO)
         {
-            if (user == null) return BadRequest();
-            if (user.Id > 0) return BadRequest("Id column is auto set. No need to specify it.");
-            if(await userService.CheckIfUserExists(user.EmailId)) { return BadRequest("User Already Present with this email Id"); }
+            if (userDTO == null) return BadRequest();
+            if (userDTO.Id > 0) return BadRequest("Id column is auto set. No need to specify it.");
+            if(await userService.CheckIfUserExists(userDTO.EmailId)) { return BadRequest("User Already Present with this email Id"); }
 
-            await userService.CreateUser(user);
+            await userService.CreateUser(userDTO);
             return Ok();
         }
     }

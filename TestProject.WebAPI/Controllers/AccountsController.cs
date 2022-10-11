@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using TestProject.WebAPI.Interfaces;
 using System.Linq;
-using TestProject.WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using TestProject.WebAPI.DTO;
 
 namespace TestProject.WebAPI.Controllers
 {
@@ -49,12 +49,12 @@ namespace TestProject.WebAPI.Controllers
 
         // POST api/<AccountController>
         [HttpPost]
-        public async Task<ActionResult> Post(Account account)
+        public async Task<ActionResult> Post(AccountDTO accountDTO)
         {
-            if (account == null) return BadRequest();
-            if (!await accountService.CanUserCreateAccount(account)) { return BadRequest("User is not eligible to create account."); }
+            if (accountDTO == null) return BadRequest();
+            if (!await accountService.CanUserCreateAccount(accountDTO)) { return BadRequest("User is not eligible to create account."); }
 
-            await accountService.CreateAccount(account);
+            await accountService.CreateAccount(accountDTO);
             return Ok();
         }
     }

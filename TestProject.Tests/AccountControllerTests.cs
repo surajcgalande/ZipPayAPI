@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using TestProject.WebAPI.Controllers;
+using TestProject.WebAPI.DTO;
 using TestProject.WebAPI.Interfaces;
 using TestProject.WebAPI.Models;
 
@@ -20,7 +21,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            var returnValue = new List<Account>() { new Account() { Id=1, Type="Savings" , Balance = 5000, UserId = 1} };
+            var returnValue = new List<AccountDTO>() { new AccountDTO() { Id=1, Type="Savings" , Balance = 5000, UserId = 1} };
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.GetAllAccounts()).ReturnsAsync(returnValue);
@@ -37,7 +38,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            var returnValue = new List<Account>();
+            var returnValue = new List<AccountDTO>();
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.GetAllAccounts()).ReturnsAsync(returnValue);
@@ -54,7 +55,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            var returnValue = new Account();
+            var returnValue = new AccountDTO();
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.GetAccountById(id)).ReturnsAsync(returnValue);
@@ -71,7 +72,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            Account returnValue = null;
+            AccountDTO returnValue = null;
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.GetAccountById(id)).ReturnsAsync(returnValue);
@@ -88,7 +89,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            Account returnValue = new Account() { Id = 1, Type = "Savings", Balance = 5000, UserId = 1 };
+            AccountDTO returnValue = new AccountDTO() { Id = 1, Type = "Savings", Balance = 5000, UserId = 1 };
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.GetAccountById(id)).ReturnsAsync(returnValue);
@@ -105,7 +106,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            Account account = null;
+            AccountDTO account = null;
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.CanUserCreateAccount(account)).ReturnsAsync(false);
@@ -122,7 +123,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            Account account = new Account() { Id = 1, Type = "Savings", Balance = 5000, UserId = 10 }; ;
+            AccountDTO account = new AccountDTO() { Id = 1, Type = "Savings", Balance = 5000, UserId = 10 }; ;
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.CanUserCreateAccount(account)).ReturnsAsync(false);
@@ -139,7 +140,7 @@ namespace TestProject.Tests
             //Arrange
             var accountService = new Mock<IAccountService>();
             var accountServiceObj = accountService.Object;
-            Account account = new Account() { Id = 1, Type = "Savings", Balance = 5000, UserId = 1 }; ;
+            AccountDTO account = new AccountDTO() { Id = 1, Type = "Savings", Balance = 5000, UserId = 1 }; ;
             var controller = new AccountsController(accountServiceObj);
             //SetUp
             accountService.Setup(s => s.CanUserCreateAccount(account)).ReturnsAsync(true);

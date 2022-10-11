@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TestProject.WebAPI.DTO;
 using TestProject.WebAPI.Models;
 
 namespace TestProject.WebAPI.Interfaces
 {
     public interface IAccountService
     {
-        Task<List<Account>> GetAllAccounts();
-        Task<Account> GetAccountById(int id);
-        Task CreateAccount(Account account);
-        Task<bool> CanUserCreateAccount(Account account);
+        Task<List<AccountDTO>> GetAllAccounts();
+        Task<AccountDTO> GetAccountById(int id);
+        Task CreateAccount(AccountDTO accountDTO);
+        Task<bool> CanUserCreateAccount(AccountDTO accountDTO);
     }
 }

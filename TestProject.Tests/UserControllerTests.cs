@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using TestProject.WebAPI.Controllers;
+using TestProject.WebAPI.DTO;
 using TestProject.WebAPI.Interfaces;
 using TestProject.WebAPI.Models;
 
@@ -20,7 +21,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var returnValue = new List<User>() { new User() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd"} };
+            var returnValue = new List<UserDTO>() { new UserDTO() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd"} };
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.GetAllUsers()).ReturnsAsync(returnValue);
@@ -37,7 +38,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var returnValue = new List<User>();
+            var returnValue = new List<UserDTO>();
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.GetAllUsers()).ReturnsAsync(returnValue);
@@ -54,7 +55,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var returnValue = new User();
+            var returnValue = new UserDTO();
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.GetUserById(id)).ReturnsAsync(returnValue);
@@ -71,7 +72,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            User user = null;
+            UserDTO user = null;
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.GetUserById(id)).ReturnsAsync(user);
@@ -88,7 +89,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var returnValue = new User() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
+            var returnValue = new UserDTO() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.GetUserById(id)).ReturnsAsync(returnValue);
@@ -105,7 +106,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            User user = null;
+            UserDTO user = null;
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.CheckIfUserExists("")).ReturnsAsync(true);
@@ -122,7 +123,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var user = new User() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
+            var user = new UserDTO() { EmailId = "abcd@g.com", Id = 3, MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.CheckIfUserExists(user.EmailId)).ReturnsAsync(true);
@@ -139,7 +140,7 @@ namespace TestProject.Tests
             //Arrange
             var userService = new Mock<IUserService>();
             var userServiceObj = userService.Object;
-            var user = new User() { EmailId = "abcd@g.com", MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
+            var user = new UserDTO() { EmailId = "abcd@g.com", MonthlyExpense = 90, MonthlySalary = 500, Name = "abcd" };
             var controller = new UsersController(userServiceObj);
             //SetUp
             userService.Setup(s => s.CheckIfUserExists(user.EmailId)).ReturnsAsync(false);
